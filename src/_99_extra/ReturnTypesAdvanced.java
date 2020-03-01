@@ -8,14 +8,22 @@ import org.jointheleague.graphical.robot.Robot;
 
 public class ReturnTypesAdvanced {
 	static Robot rob = new Robot();
-	
+
 	public static void main(String[] args) {
 		//1. Ask the user how many sides they want their shape to be
-		
+		String howManySides= JOptionPane.showInputDialog("How many sides do you want your shape to be?");
+		int age = Integer.parseInt(howManySides);
 		//2. Call canMakeShape() and save what is returned into a variable
+	boolean IDK = canMakeShape(age);
 		
 		//3. If the shape CAN be drawn
-		
+		if(IDK==true) {
+	int CTA = calculateTurnAngle(age);
+	drawPolygon(age,CTA);
+		}else if(IDK==false) {
+			notEnoughSides();
+			JOptionPane.showMessageDialog(null, "I'm sorry we cannot make a shape with that many sides\n" + "Please enter a number greater than 2");
+		}
 			//4. Call and save what is returned from calculateTurningAngle()
 		
 			//5. Use drawPolygon() to draw your shape
@@ -25,31 +33,30 @@ public class ReturnTypesAdvanced {
 			//7. Call notEnoughSides() and print out what is returned 
 	
 	}
-	
+
 	static int calculateTurnAngle(int numSides) {
-		int angle = 180-(((numSides-2)*180)/numSides);
+		int angle = 180 - (((numSides - 2) * 180) / numSides);
 		return angle;
 	}
-	
+
 	static void drawPolygon(int numSides, int degrees) {
 		rob.setSpeed(100);
 		rob.penDown();
-		for(int i = 0; i < numSides; i++) {
+		for (int i = 0; i < numSides; i++) {
 			rob.move(100);
 			rob.turn(degrees);
 		}
 		rob.hide();
 	}
-	
+
 	static boolean canMakeShape(int numSides) {
-		if(numSides >= 3) {
+		if (numSides >= 3) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	static String notEnoughSides() {
-		return "I'm sorry we cannot make a shape with that many sides\n"
-				+ "Please enter a number greater than 2";
+		return "I'm sorry we cannot make a shape with that many sides\n" + "Please enter a number greater than 2";
 	}
 }
